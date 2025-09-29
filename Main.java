@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Main {
 
+    static Scanner scanner = new Scanner(System.in); //accessible to the whole program
+
     public static void main(String[] args) {
 
         // java banking program
-
-        Scanner scanner = new Scanner(System.in);
-        double balance;
+        double balance = 0;
         boolean isRunning = true;
         int choice;
 
@@ -28,8 +28,8 @@ public class Main {
             choice = scanner.nextInt();
 
             switch(choice){ 
-                case 1 -> System.out.println("SHOW BALANCE");
-                case 2 -> System.out.println("DEPOSIT");
+                case 1 -> showBalance(balance);
+                case 2 -> balance = balance + deposit();
                 case 3 -> System.out.println("WITHDRAW");
                 case 4 -> isRunning = false;
                 default -> System.out.println("INVALID CHOICE");
@@ -37,8 +37,6 @@ public class Main {
 
         }
 
-
-        // showBalance()
 
         // deposit()
 
@@ -49,4 +47,26 @@ public class Main {
         scanner.close();
     }
     
+
+    static void showBalance(double balance){
+        System.out.println("***************");
+        System.out.printf("£%.2f\n", balance);
+    }
+
+    static double deposit() {
+
+        double amount;
+
+        System.out.print("Enter an amount to be deposited; ");
+        amount = scanner.nextDouble();
+
+        if(amount < 0){
+            System.out.println("The amount can't be negative");
+            return 0;
+        }
+        else {
+            return amount;
+        }
+
+    }
 }
