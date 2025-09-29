@@ -6,6 +6,12 @@ public class Main {
 
     public static void main(String[] args) {
 
+        if (!login()) {
+            System.out.println("Too many failed attempts. Exiting...");
+            scanner.close();
+            return;
+        }
+
         // java banking program
         double balance = 0;
         boolean isRunning = true;
@@ -45,6 +51,30 @@ public class Main {
         scanner.close();
     }
     
+    static boolean login() {
+        final int CORRECT_PIN = 1234;
+        final int MAX_ATTEMPTS = 3;
+        int attempts = 0;
+
+        System.out.println("WELCOME TO MY BANKING PROGRAM");
+        System.out.println("*****************************");
+
+        while (attempts < MAX_ATTEMPTS) {
+            System.out.println("Enter your 4 digit PIN: ");
+            int enteredPin = scanner.nextInt();
+
+            if (enteredPin == CORRECT_PIN) {
+                System.out.println("Login successful!");
+                System.out.println("*****************");
+                return true;
+            } else {
+                attempts++;
+                System.out.println("Incorrect PIN. Attempts left: " + (MAX_ATTEMPTS - attempts));
+            }
+        }
+
+        return false; 
+    }
 
     static void showBalance(double balance){
         System.out.println("***************");
@@ -88,4 +118,7 @@ public class Main {
         }
         
     }
+
+
+    
 }
